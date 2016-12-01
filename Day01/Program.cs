@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -13,12 +12,7 @@ namespace Day01
             Console.WriteLine("");
 
             var startPosition = new Coordinate(0, 0);
-            var walker = new Walker(startPosition, 0);
-
-
-            var locationSet = new HashSet<Coordinate>();
-
-            Coordinate firstCoordinateVisitedTwice = null;
+            var walker = new PathTrackingWalker(startPosition, Orientation.North);
 
             foreach (var movement in GetMovements())
             {
@@ -33,36 +27,26 @@ namespace Day01
                     case 'R':
                         walker.RotateRight();
                         break;
+
+                    default:
+                        throw new FormatException($"Could not determine rotation for movement: {movement}");
                 }
 
                 int steps = int.Parse(movement.Substring(1));
 
-                for (int i = 0; i < steps; ++i)
-                {
-                    walker.Move(1);
-
-                    if (locationSet.Contains(walker.Location))
-                    {
-                        if (firstCoordinateVisitedTwice == null)
-                        {
-                            firstCoordinateVisitedTwice = walker.Location;
-                        }
-                    }
-                    else
-                    {
-                        locationSet.Add(walker.Location);
-                    }
-                }
+                walker.Move(steps);
             }
 
-            Console.WriteLine("Walker location: {0}. Distance from start: {1}", walker.Location, walker.Location.TotalDistance(startPosition));
-            Console.WriteLine("First coordinate visited twice: {0}. Distance from start: {1}", firstCoordinateVisitedTwice, firstCoordinateVisitedTwice.TotalDistance(startPosition));
+            var firstCoordinateVisitedTwice = walker.GetLocationsVisitedMoreThanOnce().First();
+
+            Console.WriteLine($"Walker location: {walker.Location}. Distance from start: {startPosition.ManhattanDistance(walker.Location)}");
+            Console.WriteLine($"First coordinate visited twice: {firstCoordinateVisitedTwice}. Distance from start: {startPosition.ManhattanDistance(firstCoordinateVisitedTwice)}");
         }
 
         private static string[] GetMovements()
         {
             var input = File.ReadAllText("input.txt");
-            var movements = input.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
+            var movements = input.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             return movements;
         }

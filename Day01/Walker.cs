@@ -6,12 +6,11 @@
 
         public Coordinate Location { get; private set; }
 
-        public Walker(Coordinate startLocation, int startingOrientation)
+        public Walker(Coordinate startLocation, Orientation startingOrientation)
         {
             Location = startLocation;
-            _orientation = startingOrientation;
+            _orientation = (int)startingOrientation;
         }
-
 
         public void RotateLeft()
         {
@@ -25,15 +24,10 @@
 
         public void RotateRight()
         {
-            _orientation += 90;
-
-            if (_orientation >= 360)
-            {
-                _orientation = 0;
-            }
+            _orientation = (_orientation + 90) % 360;
         }
 
-        public void Move(int steps)
+        public virtual void Move(int steps)
         {
             int x = Location.X;
             int y = Location.Y;
