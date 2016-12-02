@@ -18,8 +18,8 @@ namespace Day01
 
         public int ManhattanDistance(Coordinate startCoordinate)
         {
-            int x = Math.Abs(X) + Math.Abs(startCoordinate.X);
-            int y = Math.Abs(Y) + Math.Abs(startCoordinate.Y);
+            int x = Math.Abs(X) - Math.Abs(startCoordinate.X);
+            int y = Math.Abs(Y) - Math.Abs(startCoordinate.Y);
 
             return Math.Abs(x + y);
         }
