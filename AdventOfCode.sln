@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Day01", "Day01\Day01.xproj", "{29EA07E8-60B4-48B2-A365-EF093DA9A178}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Day01", "src\Day01\Day01.xproj", "{29EA07E8-60B4-48B2-A365-EF093DA9A178}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9CBB8E07-DE58-4051-BF10-69EE80401931}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{ABD506C7-9D90-4F15-B8B0-5F11A2C1B034}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +22,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{29EA07E8-60B4-48B2-A365-EF093DA9A178} = {9CBB8E07-DE58-4051-BF10-69EE80401931}
 	EndGlobalSection
 EndGlobal
